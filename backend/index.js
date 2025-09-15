@@ -28,7 +28,7 @@ app.post('/calculate', async (req, res) => {
   else if (imc < 25) interpretation = 'Normal';
   else if (imc < 30) interpretation = 'Surpoids';
   else interpretation = 'Obésité';
-
+//tegxud
   // Sauvegarde dans Firebase Realtime Database
   if (userId) {
     await db.ref('calculsIMC').push({
