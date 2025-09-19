@@ -9,6 +9,7 @@ function App() {
     age: '',
     weight: '',
     height: '',
+    interpretation: 'test',
   });
 
   const [imc, setImc] = useState(null); 
@@ -54,28 +55,30 @@ function App() {
     }
 
     try {
-        const response = await fetch('http://localhost/backend/index.js', {
+        const response = await fetch('http://localhost:3009/saveDb', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            name: formData.name,
-            firstname: formData.firstname,
-            imc: imc
+            FirstName: formData.firstname,
+            LastName: formData.name,
+            imc: imc,
+            interpretation: interpre, // Ajouté !
+
           }),
         });
 
-        const data = await response.json();
-
-        if (data.success) {
-          console.log('Données enregistrées avec succès ✅');
-        } else {
-          console.error('Erreur côté serveur :', data.message);
-        }
-      } catch (error) {
-        console.error('Erreur lors de l’envoi des données :', error);
+         if (!response.ok) {
+        throw new Error("Erreur lors de l'envoi des données");
       }
+
+      const result = await response.json();
+      console.log("Données enregistrées avec ID :", result.id);
+
+    } catch (error) {
+      console.error("Erreur :", error);
+    }
     
   };
 
