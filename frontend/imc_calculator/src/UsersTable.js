@@ -7,7 +7,7 @@ const UsersTable = forwardRef((props, ref) => {
 
   const getUsers = async () => {
     try {
-      const response = await fetch("/users");
+      const response = await fetch("https://imc-calculator-gomz.onrender.com/users");
       if (!response.ok) throw new Error("Erreur lors de la récupération des données");
 
       const data = await response.json();

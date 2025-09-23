@@ -60,7 +60,7 @@ function App() {
       // 🔄 Masque après 10 secondes
       setTimeout(() => setShowInterpretation(false), 10000);
       try {
-        const response = await fetch('/saveDb', {
+        const response = await fetch('https://imc-calculator-gomz.onrender.com/saveDb', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
