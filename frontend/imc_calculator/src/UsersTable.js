@@ -7,7 +7,7 @@ const UsersTable = forwardRef((props, ref) => {
 
   const getUsers = async () => {
     try {
-      const response = await fetch("http://localhost:3009/users");
+      const response = await fetch("/users");
       if (!response.ok) throw new Error("Erreur lors de la récupération des données");
 
       const data = await response.json();

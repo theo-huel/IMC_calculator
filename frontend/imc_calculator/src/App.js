@@ -60,7 +60,7 @@ function App() {
       // 🔄 Masque après 10 secondes
       setTimeout(() => setShowInterpretation(false), 10000);
       try {
-        const response = await fetch('http://localhost:3009/saveDb', {
+        const response = await fetch('/saveDb', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

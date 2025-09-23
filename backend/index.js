@@ -60,5 +60,8 @@ app.get('/calculs', async (req, res) => {
 
 
 
-const PORT = 3009;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Port dynamique pour Render
+const PORT = process.env.PORT || 3009;
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Serveur démarré sur le port ${PORT}`);
+});
