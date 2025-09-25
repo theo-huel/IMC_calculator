@@ -107,12 +107,12 @@ function App() {
 
           <div>
             <label>Poids (kg) :</label>
-            <input type="number" step="0.1" name="weight" value={formData.weight} onChange={handleChange} required />
+            <input type="number" min="0.1" step="0.1" name="weight" value={formData.weight} onChange={handleChange} required />
           </div>
 
           <div>
             <label>Taille (cm) :</label>
-            <input type="number" step="0.01" name="height" value={formData.height} onChange={handleChange} required />
+            <input type="number" min="0.01" step="0.01" name="height" value={formData.height} onChange={handleChange} required />
           </div>
 
           <button type="submit">Calculer</button>
