@@ -2,6 +2,7 @@ import './App.css';
 import React, { useState, useRef } from 'react';
 import UsersTable from './UsersTable';
 
+
 function App() {
   const [formData, setFormData] = useState({
     name: '',
@@ -12,29 +13,48 @@ function App() {
     interpretation: 'test',
   });
 
+
   const [imc, setImc] = useState(null); 
   const [interpre, setInterpre] = useState(null); 
     const [showInterpretation, setShowInterpretation] = useState(false); // ✅ pour afficher temporairement
 
 
+
   // Référence pour accéder à UsersTable
   const usersTableRef = useRef();
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+  // Fonction pour réinitialiser les champs du formulaire
+  const resetForm = () => {
+    setFormData({
+      name: '',
+      firstname: '',
+      age: '',
+      weight: '',
+      height: '',
+      interpretation: 'test',
+    });
+  };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+
     const weight = parseFloat(formData.weight);
     const height = parseFloat(formData.height);
+
 
     if (!isNaN(weight) && !isNaN(height) && height > 0) {
       const calculatedImc = weight / ((height / 100) * (height / 100));
       const imcValue = calculatedImc.toFixed(2);
       setImc(imcValue);
+
 
       let interpretation = "";
       if (imcValue < 16)
@@ -54,11 +74,14 @@ function App() {
       else if (imcValue >= 40)
         interpretation = "Obésité massive (Classe III) -> Risque très grave";
 
+
       setInterpre(interpretation);
-      setShowInterpretation(true); // ✅ affiche l’interprétation
+      setShowInterpretation(true); // ✅ affiche l'interprétation
+
 
       // 🔄 Masque après 10 secondes
       setTimeout(() => setShowInterpretation(false), 10000);
+      
       try {
         const response = await fetch('https://imc-calculator-gomz.onrender.com/saveDb', {
           method: 'POST',
@@ -71,28 +94,38 @@ function App() {
           }),
         });
 
+
         if (!response.ok) throw new Error("Erreur lors de l'envoi des données");
 
+
         await response.json();
+
+        // ✅ Réinitialise les champs après un envoi réussi
+        resetForm();
 
         // 🔄 Rafraîchit le tableau après l'ajout
         if (usersTableRef.current) {
           usersTableRef.current.refresh();
         }
 
+
       } catch (error) {
         console.error("Erreur :", error);
+        // Note: les champs ne sont pas réinitialisés en cas d'erreur
       }
+
 
     } else {
       alert("Veuillez entrer des valeurs valides pour poids et taille !");
     }
   };
 
+
   return (
     <>
       <div className="App">
         <h1>Calculateur IMC</h1>
+
 
         <form onSubmit={handleSubmit}>
           <div>
@@ -100,23 +133,28 @@ function App() {
             <input type="text" name="name" value={formData.name} onChange={handleChange} required />
           </div>
 
+
           <div>
             <label>Prénom :</label>
             <input type="text" name="firstname" value={formData.firstname} onChange={handleChange} required />
           </div>
+
 
           <div>
             <label>Poids (kg) :</label>
             <input type="number" min="0.1" step="0.1" name="weight" value={formData.weight} onChange={handleChange} required />
           </div>
 
+
           <div>
             <label>Taille (cm) :</label>
             <input type="number" min="0.01" step="0.01" name="height" value={formData.height} onChange={handleChange} required />
           </div>
 
+
           <button type="submit">Calculer</button>
         </form>
+
 
         {imc && (
           <div style={{ marginTop: "20px" }}>
@@ -137,5 +175,6 @@ function App() {
     </>
   );
 }
+
 
 export default App;
