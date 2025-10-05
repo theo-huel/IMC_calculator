@@ -16,7 +16,7 @@ function App() {
 
   const [imc, setImc] = useState(null); 
   const [interpre, setInterpre] = useState(null); 
-    const [showInterpretation, setShowInterpretation] = useState(false); // ✅ pour afficher temporairement
+    const [showInterpretation, setShowInterpretation] = useState(false); // pour afficher temporairement
 
 
 
@@ -76,13 +76,27 @@ function App() {
 
 
       setInterpre(interpretation);
-      setShowInterpretation(true); // ✅ affiche l'interprétation
+      setShowInterpretation(true); // affiche l'interprétation
 
 
-      // 🔄 Masque après 10 secondes
+      //Masque après 10 secondes
       setTimeout(() => setShowInterpretation(false), 10000);
       
       try {
+        /********ZONE A DECOMMENTER SI DEPLOIEMENT DU BACKEND EN LOCAL********/
+        /*const response = await fetch('http://localhost:3009/saveDb',  {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            FirstName: formData.firstname,
+            LastName: formData.name,
+            imc: imcValue,
+            interpretation,
+          }),
+        });*/
+
+
+        /********ZONE A COMMENTER SI DEPLOIEMENT DU BACKEND EN LOCAL********/
         const response = await fetch('https://imc-calculator-gomz.onrender.com/saveDb', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -100,10 +114,10 @@ function App() {
 
         await response.json();
 
-        // ✅ Réinitialise les champs après un envoi réussi
+        // Réinitialise les champs après un envoi réussi
         resetForm();
 
-        // 🔄 Rafraîchit le tableau après l'ajout
+        // Rafraîchit le tableau après l'ajout
         if (usersTableRef.current) {
           usersTableRef.current.refresh();
         }
@@ -123,6 +137,7 @@ function App() {
 
   return (
     <>
+    <div className="app-container">
       <div className="App">
         <h1>Calculateur IMC</h1>
 
@@ -171,6 +186,7 @@ function App() {
         <div className="table-section">
             <UsersTable ref={usersTableRef} />
         </div>
+      </div>
       </div>
     </>
   );

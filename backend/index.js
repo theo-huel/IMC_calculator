@@ -3,7 +3,17 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const admin = require('firebase-admin');
 
+
+/********ZONE A DECOMMENTER SI DEPLOIEMENT EN LOCAL********/
+
 //const serviceAccount = require('./firebase-service-key.json');
+/*admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});*/
+
+
+/********ZONE A COMMENTER SI DEPLOIEMENT EN LOCAL********/
+//Permet d'utiliser les variables d'environnement placées sur render
 if (!admin.apps.length) {
   admin.initializeApp({
     credential: admin.credential.cert({
@@ -14,9 +24,8 @@ if (!admin.apps.length) {
   });
 }
 
-/*admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});*/
+
+
 
 const db = admin.firestore();
 
@@ -69,8 +78,19 @@ app.get('/calculs', async (req, res) => {
 
 
 
+
+/* Zone du port à modifier si on déploie en local ou sur render */
+
+
+/********ZONE A COMMENTER SI DEPLOIEMENT EN LOCAL********/
 // Port dynamique pour Render
 const PORT = process.env.PORT || 3009;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Serveur démarré sur le port ${PORT}`);
 });
+
+
+
+/********ZONE A DECOMMENTER SI DEPLOIEMENT EN LOCAL********/
+/*const PORT = 3009;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));*/

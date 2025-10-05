@@ -5,12 +5,20 @@
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   padding: 15px 20px;
-  max-width: 450px;
+  /*max-width: 450px;
   width: 95%;
   position: fixed;
   bottom: 20px;
-  left: 20px;
+  left: 20px;*/
+  width: 100%;
+  max-width: 450px;
   animation: fadeIn 0.4s ease-in-out;
+}
+
+.table-section .interpretation-col {
+  max-width: 120px;
+  font-size: 0.75rem;
+  line-height: 1.2;
 }
 
 /* Titre de la section */
