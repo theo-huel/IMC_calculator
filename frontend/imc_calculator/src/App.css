@@ -1,47 +1,53 @@
-/* App.css */
+/* === App.css === */
 
-/*body {
+body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   background: linear-gradient(135deg, #c8facc, #8de78d);
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
-}*/
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: linear-gradient(135deg, #c8facc, #8de78d);
+  align-items: flex-start;
   min-height: 100vh;
-  padding: 20px 0;
+  padding: 30px 20px;
 }
 
-.app-container {
+/* === CONTENEUR GLOBAL === */
+.App {
+  max-width: 1100px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.App {
-  background-color: white;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  padding: 30px 40px;
-  text-align: center;
-  max-width: 400px;
-  width: 90%;
 }
 
 h1 {
   color: #2e7d32;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  text-align: center;
 }
 
+/* === LAYOUT EN DEUX BLOCS === */
+.content-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  width: 100%;
+  flex-wrap: nowrap;
+}
+
+/* === FORMULAIRE (CARTE GAUCHE) === */
+.form-section {
+  flex: 1;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  text-align: center;
+  min-width: 320px;
+}
+
+/* === FORMULAIRE === */
 form {
   display: flex;
   flex-direction: column;
@@ -92,21 +98,17 @@ h2 {
 p {
   font-weight: bold;
   color: #1b5e20;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
-/* === USERS TABLE STYLE === */
-
+/* === TABLEAU (CARTE DROITE) === */
 .table-section {
+  flex: 1;
   background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  padding: 15px 20px;
-  max-width: 450px;
-  width: 95%;
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  padding: 25px;
+  max-width: 600px;
   animation: fadeIn 0.4s ease-in-out;
 }
 
@@ -115,33 +117,39 @@ p {
   color: #2e7d32;
   text-align: center;
   margin-top: 0;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
-/* Style du tableau */
+/* === TABLEAU === */
 .table-section table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.9rem;
   border-radius: 8px;
   overflow: hidden;
+  background-color: #ffffff;
 }
 
 .table-section th {
   background: #a5d6a7;
   color: #1b5e20;
-  padding: 8px;
+  padding: 10px;
   text-align: left;
   font-weight: bold;
 }
 
 .table-section td {
-  padding: 8px;
+  padding: 10px;
   border-bottom: 1px solid #e0e0e0;
 }
 
+/* ✅ Lignes alternées beige / vert clair */
+.table-section tr:nth-child(odd) {
+  background-color: #f9fbe7;
+}
+
 .table-section tr:nth-child(even) {
-  background: #f1f8e9;
+  background-color: #f1f8e9;
 }
 
 /* Pagination */
@@ -149,8 +157,8 @@ p {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 8px;
-  padding-top: 5px;
+  margin-top: 12px;
+  padding-top: 8px;
   border-top: 1px solid #e0e0e0;
 }
 
@@ -180,7 +188,7 @@ p {
   font-size: 0.9rem;
 }
 
-/* Animation douce d'apparition */
+/* === Animation douce === */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -193,94 +201,38 @@ p {
 }
 
 /* === RESPONSIVE DESIGN === */
-
-/* Mobile portrait */
-@media (max-width: 480px) {
-  body {
-    padding: var(--space-8) 0 var(--space-16) 0;
-  }
-  
-  .app-container {
-    gap: var(--space-16);
-    padding: 0 var(--space-8);
-  }
-  
-  .App {
-    padding: var(--space-16) var(--space-20);
-    max-width: 320px;
-  }
-  
-  input, button {
-    padding: var(--space-10) var(--space-12);
-    font-size: var(--font-size-base);
-  }
-  
-  h1 {
-    font-size: var(--font-size-2xl);
-    margin-bottom: var(--space-12);
-  }
-  
-  form {
-    gap: var(--space-12);
-  }
-  
-  label {
-    margin-bottom: var(--space-6);
-  }
-}
-
-/* Mobile landscape and small tablets */
-@media (min-width: 481px) and (max-width: 767px) {
-  body {
-    padding: var(--space-10) 0 var(--space-20) 0;
-  }
-  
-  .app-container {
-    gap: var(--space-20);
-    padding: 0 var(--space-10);
-  }
-  
-  .App {
-    padding: var(--space-20) var(--space-24);
-    max-width: 350px;
-  }
-  
-  input, button {
-    padding: var(--space-12);
-    font-size: var(--font-size-base);
-  }
-  
-  h1 {
-    font-size: var(--font-size-2xl);
-    margin-bottom: var(--space-16);
-  }
-}
-
-/* Tablette : tableau sous le formulaire */
-@media (min-width: 768px) and (max-width: 1023px) {
-  .app-container {
-    max-width: var(--container-md);
-  }
-  
-  .App {
-    max-width: 500px;
-  }
-}
-
-/* Desktop : tableau à droite du formulaire */
-@media (min-width: 1024px) {
-  .app-container {
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 50px;
-  }
-  
-  body {
-    display: flex;
-    justify-content: center;
+@media (max-width: 900px) {
+  .content-container {
+    flex-direction: column;
     align-items: center;
-    min-height: 100vh;
-    padding: 0;
+    gap: 30px;
+  }
+
+  .form-section,
+  .table-section {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .table-section table {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  input,
+  button {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  .table-section table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
   }
 }

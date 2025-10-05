@@ -125,7 +125,6 @@ function App() {
 
       } catch (error) {
         console.error("Erreur :", error);
-        // Note: les champs ne sont pas réinitialisés en cas d'erreur
       }
 
 
@@ -137,57 +136,57 @@ function App() {
 
   return (
     <>
-    <div className="app-container">
       <div className="App">
         <h1>Calculateur IMC</h1>
 
+        <div className="content-container">
+          {/* Colonne gauche : formulaire */}
+          <div className="form-section">
+            <form onSubmit={handleSubmit}>
+              <div>
+                <label>Nom :</label>
+                <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+              </div>
 
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label>Nom :</label>
-            <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+              <div>
+                <label>Prénom :</label>
+                <input type="text" name="firstname" value={formData.firstname} onChange={handleChange} required />
+              </div>
+
+              <div>
+                <label>Poids (kg) :</label>
+                <input type="number" min="0.1" step="0.1" name="weight" value={formData.weight} onChange={handleChange} required />
+              </div>
+
+              <div>
+                <label>Taille (cm) :</label>
+                <input type="number" min="0.01" step="0.01" name="height" value={formData.height} onChange={handleChange} required />
+              </div>
+
+              <button type="submit">Calculer</button>
+            </form>
+
+            {imc && (
+              <div style={{ marginTop: "20px" }}>
+                <h2>Résultat :</h2>
+                <p>IMC = {imc}</p>
+              </div>
+            )}
+            {showInterpretation && (
+              <div style={{ marginTop: "20px", transition: "opacity 5s" }}>
+                <h2>Interprétation :</h2>
+                <p>{interpre}</p>
+              </div>
+            )}
           </div>
 
-
-          <div>
-            <label>Prénom :</label>
-            <input type="text" name="firstname" value={formData.firstname} onChange={handleChange} required />
-          </div>
-
-
-          <div>
-            <label>Poids (kg) :</label>
-            <input type="number" min="0.1" step="0.1" name="weight" value={formData.weight} onChange={handleChange} required />
-          </div>
-
-
-          <div>
-            <label>Taille (cm) :</label>
-            <input type="number" min="0.01" step="0.01" name="height" value={formData.height} onChange={handleChange} required />
-          </div>
-
-
-          <button type="submit">Calculer</button>
-        </form>
-
-
-        {imc && (
-          <div style={{ marginTop: "20px" }}>
-            <h2>Résultat :</h2>
-            <p>IMC = {imc}</p>
-          </div>
-        )}
-         {showInterpretation && (
-        <div style={{ marginTop: "20px", transition: "opacity 5s" }}>
-          <h2>Interprétation :</h2>
-          <p>{interpre}</p>
-        </div>
-      )}
-        <div className="table-section">
+          {/* Colonne droite : historique */}
+          <div className="table-section">
             <UsersTable ref={usersTableRef} />
+          </div>
         </div>
       </div>
-      </div>
+
     </>
   );
 }

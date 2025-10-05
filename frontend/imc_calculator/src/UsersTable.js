@@ -1,4 +1,5 @@
 import React, { useState, useEffect, forwardRef, useImperativeHandle } from "react";
+
 const UsersTable = forwardRef((props, ref) => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -64,7 +65,7 @@ const UsersTable = forwardRef((props, ref) => {
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>IMC</th>
-                <th className="interpretation-col">Interprétation</th>
+                <th>Interprétation</th>
               </tr>
             </thead>
             <tbody>
@@ -73,7 +74,7 @@ const UsersTable = forwardRef((props, ref) => {
                   <td>{u.LastName}</td>
                   <td>{u.FirstName}</td>
                   <td>{u.imc}</td>
-                  <td className="interpretation-col">{u.interpretation}</td>
+                  <td>{u.interpretation}</td>
                 </tr>
               ))}
             </tbody>
