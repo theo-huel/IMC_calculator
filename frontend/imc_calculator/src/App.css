@@ -241,7 +241,7 @@ p {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 500px) {
   body {
     padding: 15px;
   }
@@ -255,8 +255,8 @@ p {
     padding: 15px;
     border-radius: 10px;
     min-width: auto;      /* annule le min-width de 280px */
-    width: 100%;          /* s'étendent bien sur toute la largeur */
-    max-width: 100%; 
+    width: 60%;          /* s'étendent bien sur toute la largeur */
+    max-width: 60%; 
   }
 .content-container {
     flex-wrap: wrap;
