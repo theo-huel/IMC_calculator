@@ -254,8 +254,13 @@ p {
   .table-section {
     padding: 15px;
     border-radius: 10px;
+    min-width: auto;      /* annule le min-width de 280px */
+    width: 100%;          /* s'étendent bien sur toute la largeur */
+    max-width: 100%; 
   }
-
+.content-container {
+    flex-wrap: wrap;
+  }
   .table-section table {
     display: block;
     overflow-x: auto;
